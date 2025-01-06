@@ -13,12 +13,12 @@
 </head>
 
 <body>
-  <!-- 播放/暂停音乐的 Emoji 按钮 -->
-    <button id="music-control" 
-            style="position: fixed; top: 10px; right: 10px; z-index: 1000; 
-                   background: none; border: none; font-size: 24px; cursor: pointer;">
-      🎵
-    </button>
+   <!-- 播放/暂停音乐的 Emoji 按钮 -->
+  <button id="music-control" 
+  style="position: fixed; top: 10px; right: 10px; z-index: 1000; 
+         background: none; border: none; font-size: 24px; cursor: pointer;">
+🎵
+</button>
   
     <audio id="background-music" src="music/Left And Right BTS.mp3" autoplay loop></audio>
   
@@ -135,23 +135,26 @@
       <p class="last-smile" data-node-name="outroSmiley">:)</p>
     </div>
   </div>
-<script>
-    // 控制音乐播放/暂停功能
+ <script>
     const music = document.getElementById("background-music");
     const musicControl = document.getElementById("music-control");
 
-    // 默认播放状态的图标
-    let isPlaying = true;
+    // 初始化按钮图标，根据音乐是否正在播放设置初始状态
+    const updateButtonIcon = () => {
+      musicControl.textContent = music.paused ? "🔇" : "🎵";
+    };
 
+    // 初始状态同步
+    updateButtonIcon();
+
+    // 按钮点击事件
     musicControl.addEventListener("click", () => {
-      if (isPlaying) {
-        music.pause();
-        musicControl.textContent = "🔇"; // 暂停状态图标
+      if (music.paused) {
+        music.play(); // 播放音乐
       } else {
-        music.play();
-        musicControl.textContent = "🎵"; // 播放状态图标
+        music.pause(); // 暂停音乐
       }
-      isPlaying = !isPlaying;
+      updateButtonIcon(); // 更新按钮图标
     });
   </script>
   
